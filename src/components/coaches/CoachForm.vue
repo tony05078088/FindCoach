@@ -112,7 +112,7 @@ export default {
   },
   methods: {
     clearValidity(input) {
-      console.log(input);
+    //   console.log(input);
       this[input].isValid = true;
     },
     validateForm() {
