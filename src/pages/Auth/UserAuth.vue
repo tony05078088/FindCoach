@@ -1,6 +1,6 @@
 <template>
   <base-card>
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="submitForm" >
       <div class="form-control">
         <label for="email">Email</label>
         <input type="text" id="email" v-model.trim="email" />
@@ -13,7 +13,7 @@
       <p v-if="!formIsValid">
         Please enter a valid email and password (at least 6 characters)
       </p>
-      <base-button @click="submitForm">{{ submitButtonCaption }}</base-button>
+      <base-button>{{ submitButtonCaption }}</base-button>
       <base-button type="button" mode="flat" @click="switchAuthMode">{{
         switchModeButtonCaption
       }}</base-button>
@@ -43,6 +43,15 @@ export default {
         return;
       }
       // send http requests
+      if (this.mode === 'login') {
+          console.log('Login發動')
+        //   this.$store.dispatch('login')
+      } else {
+        this.$store.dispatch('signup', {
+          email: this.email,
+          password: this.password
+        });
+      }
     },
     switchAuthMode() {
       this.mode === 'login' ? (this.mode = 'signup') : (this.mode = 'login');
