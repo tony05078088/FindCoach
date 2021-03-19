@@ -6,13 +6,34 @@
         <li>
           <router-link to="/coaches">All coaches</router-link>
         </li>
-        <li>
+        <li v-if="isLoggedIn">
           <router-link to="/requests">Requests</router-link>
+        </li>
+        <li v-else>
+          <router-link to="/auth">Login</router-link>
+        </li>
+        <li v-if="isLoggedIn">
+          <base-button @click="logoutFunction">Logout</base-button>
         </li>
       </ul>
     </nav>
   </header>
 </template>
+
+<script>
+export default {
+  methods: {
+    logoutFunction() {
+      this.$store.dispatch('logout');
+    }
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    }
+  }
+};
+</script>
 
 <style scoped>
 header {
