@@ -25,8 +25,9 @@ export default {
   },
   async fetchRequest(context) {
     const coachId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
     const response = await fetch(
-      `https://findcoach-a44ed-default-rtdb.firebaseio.com/requests/${coachId}.json`
+      `https://findcoach-a44ed-default-rtdb.firebaseio.com/requests/${coachId}.json?auth=${token}`
     );
     const responseData = await response.json();
     if (!response.ok) {
